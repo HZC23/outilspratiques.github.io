@@ -1007,13 +1007,7 @@
                 slot.className = 'time-slot';
                 
                 const time = `${hour.toString().padStart(2, '0')}:00`;
-                const filteredTasks = tasks.filter(task => {
-                    const taskDate = new Date(task.scheduledDate);
-                    return taskDate.getDate() === dayStart.getDate() &&
-                           taskDate.getMonth() === dayStart.getMonth() &&
-                           taskDate.getFullYear() === dayStart.getFullYear() &&
-                           taskDate.getHours() === hour;
-                });
+                const tasks = getTasksForTimeSlot(dayStart, hour);
                 
                 slot.innerHTML = `
                     <div class="time-label">${time}</div>
@@ -1934,6 +1928,7 @@
         
         // Initialisation au chargement de la page
         document.addEventListener('DOMContentLoaded', () => {
+            initializeLanguageSelectors();
             loadTranslationHistory();
         });   
 
